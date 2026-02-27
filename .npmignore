@@ -1,0 +1,8 @@
+tests/
+*.ts
+!*.d.ts
+tsconfig*.json
+vitest.config.ts
+.releaserc.json
+.github/
+eslint.n8n.config.mjs

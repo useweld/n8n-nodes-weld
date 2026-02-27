@@ -1,0 +1,24 @@
+FROM n8nio/n8n:latest
+
+USER root
+
+# Copy the built Weld node package into the image
+COPY package.json /opt/n8n-nodes-weld/package.json
+COPY dist/ /opt/n8n-nodes-weld/dist/
+
+# Create node_modules inside the package and symlink n8n-workflow peer dep
+RUN mkdir -p /opt/n8n-nodes-weld/node_modules && \
+    ln -s /usr/local/lib/node_modules/n8n/node_modules/n8n-workflow \
+          /opt/n8n-nodes-weld/node_modules/n8n-workflow
+
+# Swap the hardcoded production URL for the dev Convex URL
+RUN sed -i 's|https://actions.useweld.app|https://hidden-weasel-842.convex.site|g' \
+    /opt/n8n-nodes-weld/dist/nodes/shared/api.js
+
+# Set up the community nodes directory (mirrors how the n8n UI installs nodes)
+RUN mkdir -p /home/node/.n8n/nodes/node_modules && \
+    ln -s /opt/n8n-nodes-weld /home/node/.n8n/nodes/node_modules/n8n-nodes-weld && \
+    echo '{"name":"n8n-custom-nodes","private":true}' > /home/node/.n8n/nodes/package.json && \
+    chown -R node:node /home/node/.n8n/nodes
+
+USER node

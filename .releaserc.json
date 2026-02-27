@@ -1,0 +1,38 @@
+{
+  "branches": ["main"],
+  "tagFormat": "v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "perf", "release": "patch" }
+        ]
+      }
+    ],
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "."
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": false,
+        "failTitle": false
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json"],
+        "message": "chore(release): v${nextRelease.version} [skip ci]"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "node": "n8n-nodes-weld.weldTikTokVideos",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Marketing & Content"],
+  "subcategories": {
+    "Marketing & Content": ["Social Media"]
+  },
+  "resources": {
+    "primaryDocumentation": [{ "url": "https://www.useweld.app/docs/api" }]
+  },
+  "alias": ["weld", "scrape", "data extraction", "tiktok", "videos", "content"]
+}

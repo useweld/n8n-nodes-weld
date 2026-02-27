@@ -1,0 +1,95 @@
+{
+  "name": "n8n-nodes-weld",
+  "version": "0.0.0-semantically-released",
+  "description": "n8n community node for Weld — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook",
+  "author": {
+    "name": "Weld Contributors",
+    "url": "https://www.useweld.app"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "scraping",
+    "web-scraping",
+    "linkedin",
+    "instagram",
+    "tiktok",
+    "twitter",
+    "youtube",
+    "facebook",
+    "lead-generation",
+    "data-extraction"
+  ],
+  "license": "MIT",
+  "main": "dist/nodes/Weld/Weld.node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/useweld/n8n-nodes-weld.git"
+  },
+  "homepage": "https://www.useweld.app",
+  "bugs": {
+    "url": "https://github.com/useweld/n8n-nodes-weld/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/WeldApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Weld/Weld.node.js",
+      "dist/nodes/WeldJobs/WeldJobs.node.js",
+      "dist/nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node.js",
+      "dist/nodes/WeldLinkedInCompanies/WeldLinkedInCompanies.node.js",
+      "dist/nodes/WeldLinkedInPosts/WeldLinkedInPosts.node.js",
+      "dist/nodes/WeldInstagramProfiles/WeldInstagramProfiles.node.js",
+      "dist/nodes/WeldInstagramPosts/WeldInstagramPosts.node.js",
+      "dist/nodes/WeldInstagramComments/WeldInstagramComments.node.js",
+      "dist/nodes/WeldTikTokProfiles/WeldTikTokProfiles.node.js",
+      "dist/nodes/WeldTikTokVideos/WeldTikTokVideos.node.js",
+      "dist/nodes/WeldTwitterProfiles/WeldTwitterProfiles.node.js",
+      "dist/nodes/WeldTwitterPosts/WeldTwitterPosts.node.js",
+      "dist/nodes/WeldYouTubeChannels/WeldYouTubeChannels.node.js",
+      "dist/nodes/WeldYouTubeComments/WeldYouTubeComments.node.js",
+      "dist/nodes/WeldFacebookProfiles/WeldFacebookProfiles.node.js",
+      "dist/nodes/WeldFacebookGroups/WeldFacebookGroups.node.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-assets.js",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "dev:n8n": "docker compose -f docker-compose.dev.yml up",
+    "dev:n8n:down": "docker compose -f docker-compose.dev.yml down",
+    "dev:n8n:reset": "docker compose -f docker-compose.dev.yml down -v",
+    "lint": "tsc --noEmit",
+    "lint:n8n": "eslint --config eslint.n8n.config.mjs nodes/ credentials/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.0",
+    "@semantic-release/npm": "^13.1.0",
+    "@semantic-release/release-notes-generator": "^14.0.0",
+    "@types/node": "^20",
+    "@typescript-eslint/parser": "^8.54.0",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "eslint": "~9.17.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.6",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^3"
+  }
+}
