@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { mockEmptyResults, mockResults } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 describe("scrapeJob getResults operation", () => {
 	it("should call the correct URL with jobId and limit", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: false,
@@ -30,7 +30,7 @@ describe("scrapeJob getResults operation", () => {
 	it("should return each result.data as a separate item with pairedItem", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: false,
@@ -51,7 +51,7 @@ describe("scrapeJob getResults operation", () => {
 	it("should return empty array for no results", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: false,
@@ -68,7 +68,7 @@ describe("scrapeJob getResults operation", () => {
 	it("should fallback to full result object when .data is missing", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: false,
@@ -88,7 +88,7 @@ describe("scrapeJob getResults operation", () => {
 	it("should use default limit of 50 when returnAll is false", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: false,
@@ -106,7 +106,7 @@ describe("scrapeJob getResults operation", () => {
 	it("should fetch all results when returnAll is true", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "getResults",
 				jobId: "job_abc123",
 				returnAll: true,

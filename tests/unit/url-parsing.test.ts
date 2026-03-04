@@ -1,17 +1,26 @@
+import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldLinkedInProfiles } from "../../nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node";
 import { mockCreateJobResponse } from "../mocks/mockData";
-import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
+import {
+	createMockExecuteFunctions,
+	type MockedExecuteFunctions,
+} from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node: INodeType = new WeldLinkedInProfiles();
+
+async function run(mock: MockedExecuteFunctions) {
+	return (await node.execute!.call(mock)) as unknown as {
+		json: Record<string, unknown>;
+		pairedItem?: unknown;
+	}[][];
+}
 
 function createJobMock(urls: string) {
 	return createMockExecuteFunctions({
 		nodeParameters: {
-			resource: "scrapeJob",
 			operation: "create",
-			scraperId: "linkedin-profiles",
 			urls,
 			jobName: "",
 			waitForCompletion: false,
@@ -26,7 +35,7 @@ describe("URL parsing", () => {
 			"https://linkedin.com/in/alice\nhttps://linkedin.com/in/bob"
 		);
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
@@ -41,7 +50,7 @@ describe("URL parsing", () => {
 			"https://linkedin.com/in/alice,https://linkedin.com/in/bob"
 		);
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
@@ -53,10 +62,10 @@ describe("URL parsing", () => {
 
 	it("should parse mixed newline and comma URLs", async () => {
 		const mock = createJobMock(
-			"https://a.com\nhttps://b.com,https://c.com\nhttps://d.com"
+			"https://linkedin.com/in/a\nhttps://linkedin.com/in/b,https://linkedin.com/in/c\nhttps://linkedin.com/in/d"
 		);
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
@@ -68,7 +77,7 @@ describe("URL parsing", () => {
 			"  https://linkedin.com/in/alice  \n  https://linkedin.com/in/bob  "
 		);
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
@@ -83,7 +92,7 @@ describe("URL parsing", () => {
 			"https://linkedin.com/in/alice\n\n\nhttps://linkedin.com/in/bob\n"
 		);
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
@@ -93,22 +102,34 @@ describe("URL parsing", () => {
 	it("should throw NodeOperationError when no URLs provided", async () => {
 		const mock = createJobMock("");
 
-		await expect(node.execute.call(mock)).rejects.toThrow(NodeOperationError);
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 	});
 
 	it("should throw NodeOperationError for whitespace-only input", async () => {
 		const mock = createJobMock("   \n  \n  ");
 
-		await expect(node.execute.call(mock)).rejects.toThrow(NodeOperationError);
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 	});
 
 	it("should handle a single URL", async () => {
 		const mock = createJobMock("https://linkedin.com/in/alice");
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
 		expect(body.inputs).toEqual([{ url: "https://linkedin.com/in/alice" }]);
+	});
+
+	it("should reject URLs from wrong platform", async () => {
+		const mock = createJobMock("https://instagram.com/user");
+
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
+	});
+
+	it("should reject URLs without protocol", async () => {
+		const mock = createJobMock("linkedin.com/in/alice");
+
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 	});
 });

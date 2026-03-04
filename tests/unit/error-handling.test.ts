@@ -1,15 +1,15 @@
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 describe("error handling", () => {
 	it("should throw NodeOperationError when continueOnFail is false", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_123",
 			},
@@ -25,7 +25,7 @@ describe("error handling", () => {
 	it("should return error item when continueOnFail is true", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_123",
 			},
@@ -47,7 +47,7 @@ describe("error handling", () => {
 	it("should handle non-Error thrown values with continueOnFail", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_123",
 			},

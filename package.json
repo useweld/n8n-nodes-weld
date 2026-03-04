@@ -22,7 +22,7 @@
   ],
   "packageManager": "pnpm@10.28.2",
   "license": "MIT",
-  "main": "dist/nodes/Weld/Weld.node.js",
+  "main": "dist/nodes/WeldJobs/WeldJobs.node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/useweld/n8n-nodes-weld.git"
@@ -45,7 +45,6 @@
       "dist/credentials/WeldApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Weld/Weld.node.js",
       "dist/nodes/WeldJobs/WeldJobs.node.js",
       "dist/nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node.js",
       "dist/nodes/WeldLinkedInCompanies/WeldLinkedInCompanies.node.js",
@@ -60,7 +59,16 @@
       "dist/nodes/WeldYouTubeChannels/WeldYouTubeChannels.node.js",
       "dist/nodes/WeldYouTubeComments/WeldYouTubeComments.node.js",
       "dist/nodes/WeldFacebookProfiles/WeldFacebookProfiles.node.js",
-      "dist/nodes/WeldFacebookGroups/WeldFacebookGroups.node.js"
+      "dist/nodes/WeldFacebookGroups/WeldFacebookGroups.node.js",
+      "dist/nodes/WeldIndeedJobs/WeldIndeedJobs.node.js",
+      "dist/nodes/WeldIndeedCompanies/WeldIndeedCompanies.node.js",
+      "dist/nodes/WeldGlassdoorCompanies/WeldGlassdoorCompanies.node.js",
+      "dist/nodes/WeldGlassdoorReviews/WeldGlassdoorReviews.node.js",
+      "dist/nodes/WeldGlassdoorJobs/WeldGlassdoorJobs.node.js",
+      "dist/nodes/WeldYelpBusinesses/WeldYelpBusinesses.node.js",
+      "dist/nodes/WeldYelpReviews/WeldYelpReviews.node.js",
+      "dist/nodes/WeldGitHubRepositories/WeldGitHubRepositories.node.js",
+      "dist/nodes/WeldCrunchbaseCompanies/WeldCrunchbaseCompanies.node.js"
     ]
   },
   "scripts": {

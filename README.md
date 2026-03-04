@@ -1,6 +1,6 @@
 # n8n-nodes-weld
 
-n8n community node for [Weld](https://www.useweld.app) — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook.
+n8n community node for [Weld](https://www.useweld.app) — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube, Facebook, Indeed, Glassdoor, Yelp, GitHub & Crunchbase.
 
 ## Installation
 
@@ -38,6 +38,15 @@ Each scraper has its own dedicated node with tailored input fields and AI agent 
 | **Weld YouTube Comments** | `youtube-comments` | Video URLs | 2 cr |
 | **Weld Facebook Profiles** | `facebook-profiles` | Profile URLs | 4 cr |
 | **Weld Facebook Groups** | `facebook-groups` | Group URLs | 3 cr |
+| **Weld Indeed Jobs** | `indeed-jobs` | Job listing URLs | 5 cr |
+| **Weld Indeed Companies** | `indeed-companies` | Company URLs | 5 cr |
+| **Weld Glassdoor Companies** | `glassdoor-companies` | Company URLs | 5 cr |
+| **Weld Glassdoor Reviews** | `glassdoor-reviews` | Review URLs | 5 cr |
+| **Weld Glassdoor Jobs** | `glassdoor-jobs` | Job listing URLs | 5 cr |
+| **Weld Yelp Businesses** | `yelp-businesses` | Business URLs | 5 cr |
+| **Weld Yelp Reviews** | `yelp-reviews` | Review URLs | 5 cr |
+| **Weld GitHub Repositories** | `github-repositories` | Repository URLs | 5 cr |
+| **Weld Crunchbase Companies** | `crunchbase-companies` | Company URLs | 5 cr |
 
 Each scraper node supports three operations:
 

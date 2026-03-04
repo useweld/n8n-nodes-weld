@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { mockCreditBalance, mockTransactions } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 describe("credits getBalance operation", () => {
 	it("should return the full balance response", async () => {

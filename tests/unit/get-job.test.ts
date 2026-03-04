@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { mockJobCompleted } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 describe("scrapeJob get operation", () => {
 	it("should call the correct URL with encoded jobId", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_abc123",
 			},
@@ -27,7 +27,7 @@ describe("scrapeJob get operation", () => {
 	it("should return the job object from response.job", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_abc123",
 			},
@@ -44,7 +44,7 @@ describe("scrapeJob get operation", () => {
 		const directResponse = { _id: "job_xyz", status: "completed" };
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job_xyz",
 			},
@@ -59,7 +59,7 @@ describe("scrapeJob get operation", () => {
 	it("should URL-encode special characters in jobId", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "get",
 				jobId: "job/with spaces&chars",
 			},
