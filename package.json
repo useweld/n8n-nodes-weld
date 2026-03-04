@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-weld",
-  "version": "0.0.0-semantically-released",
+  "version": "1.0.0",
   "description": "n8n community node for Weld — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook",
   "author": {
     "name": "Weld Contributors",
@@ -20,6 +20,7 @@
     "lead-generation",
     "data-extraction"
   ],
+  "packageManager": "pnpm@10.28.2",
   "license": "MIT",
   "main": "dist/nodes/Weld/Weld.node.js",
   "repository": {
