@@ -78,22 +78,18 @@ async function fetchCompletedResults(
 	resultLimit: number,
 	job: IDataObject
 ): Promise<INodeExecutionData | INodeExecutionData[]> {
-	const resultsResponse = await ctx.helpers.httpRequestWithAuthentication.call(
-		ctx,
-		"weldApi",
-		{
-			method: "GET",
-			url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${resultLimit}`,
-			json: true,
-		}
-	);
+	const resultsResponse = await httpWithRetry(ctx, {
+		method: "GET",
+		url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${resultLimit}`,
+		json: true,
+	});
 
-	const results = resultsResponse.results ?? [];
+	const results = (resultsResponse.results ?? []) as Array<{ data?: unknown }>;
 	if (results.length === 0) {
 		return { json: { ...job, results: [] } };
 	}
 
-	return results.map((r: { data?: unknown }) => ({
+	return results.map((r) => ({
 		json: {
 			_jobId: jobId,
 			_scraperId: scraperId,

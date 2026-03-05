@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 const mockCancelResponse = {
 	jobId: "job_abc123",
@@ -14,7 +14,7 @@ describe("scrapeJob cancel operation", () => {
 	it("should send POST to cancel endpoint with jobId", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "cancel",
 				jobId: "job_abc123",
 			},
@@ -37,7 +37,7 @@ describe("scrapeJob cancel operation", () => {
 	it("should return the cancel response", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "cancel",
 				jobId: "job_abc123",
 			},

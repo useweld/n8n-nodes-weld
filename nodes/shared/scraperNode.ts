@@ -6,7 +6,7 @@ import type {
 	INodeTypeDescription,
 } from "n8n-workflow";
 import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
-import { BASE_URL, URL_SPLIT_RE } from "./api";
+import { BASE_URL, URL_SPLIT_RE, httpWithRetry } from "./api";
 import { pollForResults } from "./polling";
 import type { ScraperNodeConfig } from "./types";
 
@@ -218,16 +218,12 @@ async function executeScraperOperation(
 		}
 		case "get": {
 			const jobId = ctx.getNodeParameter("jobId", i) as string;
-			const response = await ctx.helpers.httpRequestWithAuthentication.call(
-				ctx,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/jobs/get?jobId=${encodeURIComponent(jobId)}`,
-					json: true,
-				}
-			);
-			return [{ json: response.job ?? response }];
+			const response = await httpWithRetry(ctx, {
+				method: "GET",
+				url: `${baseUrl}/api/jobs/get?jobId=${encodeURIComponent(jobId)}`,
+				json: true,
+			});
+			return [{ json: (response.job ?? response) as IDataObject }];
 		}
 		case "getResults": {
 			const jobId = ctx.getNodeParameter("jobId", i) as string;
@@ -235,17 +231,13 @@ async function executeScraperOperation(
 			const limit = returnAll
 				? 10_000
 				: (ctx.getNodeParameter("limit", i, 50) as number);
-			const response = await ctx.helpers.httpRequestWithAuthentication.call(
-				ctx,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${limit}`,
-					json: true,
-				}
-			);
-			const results = response.results ?? [];
-			return (results as Array<{ data?: IDataObject }>).map((r) => ({
+			const response = await httpWithRetry(ctx, {
+				method: "GET",
+				url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${limit}`,
+				json: true,
+			});
+			const results = (response.results ?? []) as Array<{ data?: IDataObject }>;
+			return results.map((r) => ({
 				json: (r.data ?? r) as IDataObject,
 			}));
 		}

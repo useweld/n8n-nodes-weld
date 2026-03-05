@@ -6,7 +6,7 @@ import type {
 	INodeTypeDescription,
 } from "n8n-workflow";
 import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
-import { BASE_URL } from "../shared/api";
+import { BASE_URL, httpWithRetry } from "../shared/api";
 
 export class WeldJobs implements INodeType {
 	description: INodeTypeDescription = {
@@ -228,16 +228,12 @@ async function executeJobsOperation(
 	switch (key) {
 		case "job.get": {
 			const jobId = this.getNodeParameter("jobId", i) as string;
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/jobs/get?jobId=${encodeURIComponent(jobId)}`,
-					json: true,
-				}
-			);
-			return [{ json: response.job ?? response }];
+			const response = await httpWithRetry(this, {
+				method: "GET",
+				url: `${baseUrl}/api/jobs/get?jobId=${encodeURIComponent(jobId)}`,
+				json: true,
+			});
+			return [{ json: (response.job ?? response) as IDataObject }];
 		}
 		case "job.getResults": {
 			const jobId = this.getNodeParameter("jobId", i) as string;
@@ -245,17 +241,13 @@ async function executeJobsOperation(
 			const limit = returnAll
 				? 10_000
 				: (this.getNodeParameter("limit", i, 50) as number);
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${limit}`,
-					json: true,
-				}
-			);
-			const results = response.results ?? [];
-			return (results as Array<{ data?: IDataObject }>).map((r) => ({
+			const response = await httpWithRetry(this, {
+				method: "GET",
+				url: `${baseUrl}/api/jobs/results?jobId=${encodeURIComponent(jobId)}&limit=${limit}`,
+				json: true,
+			});
+			const results = (response.results ?? []) as Array<{ data?: IDataObject }>;
+			return results.map((r) => ({
 				json: (r.data ?? r) as IDataObject,
 			}));
 		}
@@ -273,57 +265,41 @@ async function executeJobsOperation(
 			if (statusFilter) {
 				url += `&status=${encodeURIComponent(statusFilter)}`;
 			}
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "GET",
-					url,
-					json: true,
-				}
-			);
-			const jobs = response.jobs ?? [];
-			return (jobs as IDataObject[]).map((job) => ({ json: job }));
+			const response = await httpWithRetry(this, {
+				method: "GET",
+				url,
+				json: true,
+			});
+			const jobs = (response.jobs ?? []) as IDataObject[];
+			return jobs.map((job) => ({ json: job }));
 		}
 		case "job.cancel": {
 			const jobId = this.getNodeParameter("jobId", i) as string;
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "POST",
-					url: `${baseUrl}/api/jobs/cancel`,
-					body: { jobId },
-					json: true,
-				}
-			);
+			const response = await httpWithRetry(this, {
+				method: "POST",
+				url: `${baseUrl}/api/jobs/cancel`,
+				body: { jobId },
+				json: true,
+			});
 			return [{ json: response }];
 		}
 		case "credits.getBalance": {
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/credits/balance`,
-					json: true,
-				}
-			);
+			const response = await httpWithRetry(this, {
+				method: "GET",
+				url: `${baseUrl}/api/credits/balance`,
+				json: true,
+			});
 			return [{ json: response }];
 		}
 		case "credits.getTransactions": {
 			const limit = this.getNodeParameter("transactionLimit", i, 50) as number;
-			const response = await this.helpers.httpRequestWithAuthentication.call(
-				this,
-				"weldApi",
-				{
-					method: "GET",
-					url: `${baseUrl}/api/credits/transactions?limit=${limit}`,
-					json: true,
-				}
-			);
-			const txns = response.transactions ?? [];
-			return (txns as IDataObject[]).map((txn) => ({ json: txn }));
+			const response = await httpWithRetry(this, {
+				method: "GET",
+				url: `${baseUrl}/api/credits/transactions?limit=${limit}`,
+				json: true,
+			});
+			const txns = (response.transactions ?? []) as IDataObject[];
+			return txns.map((txn) => ({ json: txn }));
 		}
 		default:
 			return [];

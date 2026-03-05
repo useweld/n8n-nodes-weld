@@ -1,0 +1,21 @@
+{
+  "node": "n8n-nodes-weld.weldGitHubRepositories",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Development"],
+  "subcategories": {
+    "Development": ["Developer Tools"]
+  },
+  "resources": {
+    "primaryDocumentation": [{ "url": "https://www.useweld.app/docs/api" }]
+  },
+  "alias": [
+    "weld",
+    "scrape",
+    "data extraction",
+    "github",
+    "repositories",
+    "open source",
+    "code"
+  ]
+}

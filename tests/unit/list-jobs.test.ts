@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
 import { mockJobsList } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node = new WeldJobs();
 
 describe("scrapeJob list operation", () => {
 	it("should return each job as a separate item with pairedItem", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "",
 				returnAll: false,
@@ -30,7 +30,7 @@ describe("scrapeJob list operation", () => {
 	it("should append status filter to URL when provided", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "completed",
 				returnAll: false,
@@ -49,7 +49,7 @@ describe("scrapeJob list operation", () => {
 	it("should not append status filter when empty", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "",
 				returnAll: false,
@@ -68,7 +68,7 @@ describe("scrapeJob list operation", () => {
 	it("should respect limit parameter", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "",
 				returnAll: false,
@@ -87,7 +87,7 @@ describe("scrapeJob list operation", () => {
 	it("should return empty array when no jobs exist", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "",
 				returnAll: false,
@@ -104,7 +104,7 @@ describe("scrapeJob list operation", () => {
 	it("should URL-encode the status filter value", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "pending",
 				returnAll: false,
@@ -123,7 +123,7 @@ describe("scrapeJob list operation", () => {
 	it("should fetch all jobs when returnAll is true", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
+				resource: "job",
 				operation: "list",
 				statusFilter: "",
 				returnAll: true,

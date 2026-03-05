@@ -1,0 +1,21 @@
+{
+  "node": "n8n-nodes-weld.weldYelpReviews",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Data & Storage"],
+  "subcategories": {
+    "Data & Storage": ["Data Transformation"]
+  },
+  "resources": {
+    "primaryDocumentation": [{ "url": "https://www.useweld.app/docs/api" }]
+  },
+  "alias": [
+    "weld",
+    "scrape",
+    "data extraction",
+    "yelp",
+    "reviews",
+    "ratings",
+    "restaurants"
+  ]
+}

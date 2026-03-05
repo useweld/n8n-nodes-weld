@@ -1,8 +1,15 @@
 import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it, vi } from "vitest";
+import { WeldCrunchbaseCompanies } from "../../nodes/WeldCrunchbaseCompanies/WeldCrunchbaseCompanies.node";
 import { WeldFacebookGroups } from "../../nodes/WeldFacebookGroups/WeldFacebookGroups.node";
 import { WeldFacebookProfiles } from "../../nodes/WeldFacebookProfiles/WeldFacebookProfiles.node";
+import { WeldGitHubRepositories } from "../../nodes/WeldGitHubRepositories/WeldGitHubRepositories.node";
+import { WeldGlassdoorCompanies } from "../../nodes/WeldGlassdoorCompanies/WeldGlassdoorCompanies.node";
+import { WeldGlassdoorJobs } from "../../nodes/WeldGlassdoorJobs/WeldGlassdoorJobs.node";
+import { WeldGlassdoorReviews } from "../../nodes/WeldGlassdoorReviews/WeldGlassdoorReviews.node";
+import { WeldIndeedCompanies } from "../../nodes/WeldIndeedCompanies/WeldIndeedCompanies.node";
+import { WeldIndeedJobs } from "../../nodes/WeldIndeedJobs/WeldIndeedJobs.node";
 import { WeldInstagramComments } from "../../nodes/WeldInstagramComments/WeldInstagramComments.node";
 import { WeldInstagramPosts } from "../../nodes/WeldInstagramPosts/WeldInstagramPosts.node";
 import { WeldInstagramProfiles } from "../../nodes/WeldInstagramProfiles/WeldInstagramProfiles.node";
@@ -13,6 +20,8 @@ import { WeldTikTokProfiles } from "../../nodes/WeldTikTokProfiles/WeldTikTokPro
 import { WeldTikTokVideos } from "../../nodes/WeldTikTokVideos/WeldTikTokVideos.node";
 import { WeldTwitterPosts } from "../../nodes/WeldTwitterPosts/WeldTwitterPosts.node";
 import { WeldTwitterProfiles } from "../../nodes/WeldTwitterProfiles/WeldTwitterProfiles.node";
+import { WeldYelpBusinesses } from "../../nodes/WeldYelpBusinesses/WeldYelpBusinesses.node";
+import { WeldYelpReviews } from "../../nodes/WeldYelpReviews/WeldYelpReviews.node";
 import { WeldYouTubeChannels } from "../../nodes/WeldYouTubeChannels/WeldYouTubeChannels.node";
 import { WeldYouTubeComments } from "../../nodes/WeldYouTubeComments/WeldYouTubeComments.node";
 import {
@@ -125,6 +134,61 @@ const SCRAPERS: ScraperTestCase[] = [
 		NodeClass: WeldFacebookGroups,
 		scraperId: "facebook-groups",
 		sampleUrl: "https://facebook.com/groups/groupname",
+	},
+	{
+		name: "WeldIndeedJobs",
+		NodeClass: WeldIndeedJobs,
+		scraperId: "indeed-jobs",
+		sampleUrl: "https://indeed.com/viewjob?jk=abc123",
+	},
+	{
+		name: "WeldIndeedCompanies",
+		NodeClass: WeldIndeedCompanies,
+		scraperId: "indeed-companies",
+		sampleUrl: "https://indeed.com/cmp/Acme-Corp",
+	},
+	{
+		name: "WeldGlassdoorCompanies",
+		NodeClass: WeldGlassdoorCompanies,
+		scraperId: "glassdoor-companies",
+		sampleUrl: "https://glassdoor.com/Overview/Working-at-Acme-Corp",
+	},
+	{
+		name: "WeldGlassdoorReviews",
+		NodeClass: WeldGlassdoorReviews,
+		scraperId: "glassdoor-reviews",
+		sampleUrl: "https://glassdoor.com/Reviews/Acme-Corp-Reviews-E12345.htm",
+	},
+	{
+		name: "WeldGlassdoorJobs",
+		NodeClass: WeldGlassdoorJobs,
+		scraperId: "glassdoor-jobs",
+		sampleUrl:
+			"https://glassdoor.com/Job/acme-corp-software-engineer-JV12345.htm",
+	},
+	{
+		name: "WeldYelpBusinesses",
+		NodeClass: WeldYelpBusinesses,
+		scraperId: "yelp-businesses",
+		sampleUrl: "https://yelp.com/biz/acme-restaurant-new-york",
+	},
+	{
+		name: "WeldYelpReviews",
+		NodeClass: WeldYelpReviews,
+		scraperId: "yelp-reviews",
+		sampleUrl: "https://yelp.com/biz/acme-restaurant-new-york",
+	},
+	{
+		name: "WeldGitHubRepositories",
+		NodeClass: WeldGitHubRepositories,
+		scraperId: "github-repositories",
+		sampleUrl: "https://github.com/owner/repo",
+	},
+	{
+		name: "WeldCrunchbaseCompanies",
+		NodeClass: WeldCrunchbaseCompanies,
+		scraperId: "crunchbase-companies",
+		sampleUrl: "https://crunchbase.com/organization/acme-corp",
 	},
 ];
 

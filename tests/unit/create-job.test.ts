@@ -1,6 +1,7 @@
+import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it, vi } from "vitest";
-import { Weld } from "../../nodes/Weld/Weld.node";
+import { WeldLinkedInProfiles } from "../../nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node";
 import {
 	mockCreateJobResponse,
 	mockJobCompleted,
@@ -9,17 +10,25 @@ import {
 	mockJobProcessing,
 	mockResults,
 } from "../mocks/mockData";
-import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
+import {
+	createMockExecuteFunctions,
+	type MockedExecuteFunctions,
+} from "../mocks/mockExecuteFunctions";
 
-const node = new Weld();
+const node: INodeType = new WeldLinkedInProfiles();
 
-describe("scrapeJob create operation", () => {
+async function run(mock: MockedExecuteFunctions) {
+	return (await node.execute!.call(mock)) as unknown as {
+		json: Record<string, unknown>;
+		pairedItem?: unknown;
+	}[][];
+}
+
+describe("scraper create operation", () => {
 	it("should return job ID immediately when waitForCompletion is false", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "My Test Job",
 				waitForCompletion: false,
@@ -27,7 +36,7 @@ describe("scrapeJob create operation", () => {
 			httpHandler: () => mockCreateJobResponse,
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		expect(result[0]).toHaveLength(1);
 		expect(result[0][0].json).toEqual(mockCreateJobResponse);
@@ -36,17 +45,15 @@ describe("scrapeJob create operation", () => {
 	it("should send correct POST body to create endpoint", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "instagram-profiles",
-				urls: "https://instagram.com/user1\nhttps://instagram.com/user2",
-				jobName: "IG Batch",
+				urls: "https://linkedin.com/in/user1\nhttps://linkedin.com/in/user2",
+				jobName: "LI Batch",
 				waitForCompletion: false,
 			},
 			httpHandler: () => mockCreateJobResponse,
 		});
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const request = call[1] as {
@@ -61,21 +68,19 @@ describe("scrapeJob create operation", () => {
 		};
 		expect(request.method).toBe("POST");
 		expect(request.url).toContain("/api/jobs/create");
-		expect(request.body.scraperId).toBe("instagram-profiles");
-		expect(request.body.name).toBe("IG Batch");
+		expect(request.body.scraperId).toBe("linkedin-profiles");
+		expect(request.body.name).toBe("LI Batch");
 		expect(request.body.mode).toBeUndefined();
 		expect(request.body.inputs).toEqual([
-			{ url: "https://instagram.com/user1" },
-			{ url: "https://instagram.com/user2" },
+			{ url: "https://linkedin.com/in/user1" },
+			{ url: "https://linkedin.com/in/user2" },
 		]);
 	});
 
 	it("should omit name when jobName is empty", async () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: false,
@@ -83,7 +88,7 @@ describe("scrapeJob create operation", () => {
 			httpHandler: () => mockCreateJobResponse,
 		});
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
 		const body = (call[1] as { body: { name?: string } }).body;
@@ -96,9 +101,7 @@ describe("scrapeJob create operation", () => {
 		let callCount = 0;
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -117,7 +120,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		vi.useRealTimers();
 
@@ -140,9 +143,7 @@ describe("scrapeJob create operation", () => {
 
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -155,7 +156,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		vi.useRealTimers();
 
@@ -172,9 +173,7 @@ describe("scrapeJob create operation", () => {
 
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -188,7 +187,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		await expect(node.execute.call(mock)).rejects.toThrow(NodeOperationError);
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 
 		vi.useRealTimers();
 	});
@@ -198,9 +197,7 @@ describe("scrapeJob create operation", () => {
 
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -215,7 +212,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		vi.useRealTimers();
 
@@ -229,9 +226,7 @@ describe("scrapeJob create operation", () => {
 
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -247,7 +242,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		await node.execute.call(mock);
+		await run(mock);
 
 		vi.useRealTimers();
 
@@ -265,9 +260,7 @@ describe("scrapeJob create operation", () => {
 		let pollCount = 0;
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -286,7 +279,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		vi.useRealTimers();
 
@@ -300,9 +293,7 @@ describe("scrapeJob create operation", () => {
 		let pollCount = 0;
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -321,7 +312,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		const result = await node.execute.call(mock);
+		const result = await run(mock);
 
 		vi.useRealTimers();
 
@@ -334,9 +325,7 @@ describe("scrapeJob create operation", () => {
 
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
-				resource: "scrapeJob",
 				operation: "create",
-				scraperId: "linkedin-profiles",
 				urls: "https://linkedin.com/in/test",
 				jobName: "",
 				waitForCompletion: true,
@@ -351,7 +340,7 @@ describe("scrapeJob create operation", () => {
 			},
 		});
 
-		await expect(node.execute.call(mock)).rejects.toThrow(
+		await expect(run(mock)).rejects.toThrow(
 			"503 Service Unavailable"
 		);
 
