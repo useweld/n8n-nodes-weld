@@ -4,6 +4,7 @@
   "description": "n8n community node for Weld — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook",
   "author": {
     "name": "Weld Contributors",
+    "email": "dev@useweld.app",
     "url": "https://www.useweld.app"
   },
   "keywords": [
