@@ -26,13 +26,6 @@
         "successComment": false,
         "failTitle": false
       }
-    ],
-    [
-      "@semantic-release/git",
-      {
-        "assets": ["package.json"],
-        "message": "chore(release): v${nextRelease.version} [skip ci]"
-      }
     ]
   ]
 }
