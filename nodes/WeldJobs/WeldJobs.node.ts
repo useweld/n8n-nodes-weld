@@ -5,7 +5,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from "n8n-workflow";
-import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
+import { NodeOperationError } from "n8n-workflow";
 import { BASE_URL, httpWithRetry } from "../shared/api";
 
 export class WeldJobs implements INodeType {
@@ -22,8 +22,8 @@ export class WeldJobs implements INodeType {
 		description:
 			"Manage Weld scrape jobs and credits — list, cancel, check status, and view balance",
 		defaults: { name: "Weld Jobs" },
-		inputs: [NodeConnectionTypes.Main],
-		outputs: [NodeConnectionTypes.Main],
+		inputs: ["main"],
+		outputs: ["main"],
 		usableAsTool: true,
 		credentials: [{ name: "weldApi", required: true }],
 		properties: [
