@@ -5,7 +5,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from "n8n-workflow";
-import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
+import { NodeOperationError } from "n8n-workflow";
 import { BASE_URL, URL_SPLIT_RE, httpWithRetry } from "./api";
 import { pollForResults } from "./polling";
 import type { ScraperNodeConfig } from "./types";
@@ -23,8 +23,8 @@ function buildDescription(config: ScraperNodeConfig): INodeTypeDescription {
 		subtitle: '={{$parameter["operation"]}}',
 		description: config.description,
 		defaults: { name: config.displayName },
-		inputs: [NodeConnectionTypes.Main],
-		outputs: [NodeConnectionTypes.Main],
+		inputs: ["main"],
+		outputs: ["main"],
 		usableAsTool: true,
 		credentials: [{ name: "weldApi", required: true }],
 		properties: [
