@@ -70,7 +70,15 @@
       "dist/nodes/ScraperNodeYelpBusinesses/ScraperNodeYelpBusinesses.node.js",
       "dist/nodes/ScraperNodeYelpReviews/ScraperNodeYelpReviews.node.js",
       "dist/nodes/ScraperNodeGitHubRepositories/ScraperNodeGitHubRepositories.node.js",
-      "dist/nodes/ScraperNodeCrunchbaseCompanies/ScraperNodeCrunchbaseCompanies.node.js"
+      "dist/nodes/ScraperNodeCrunchbaseCompanies/ScraperNodeCrunchbaseCompanies.node.js",
+      "dist/nodes/ScraperNodeLinkedInJobs/ScraperNodeLinkedInJobs.node.js",
+      "dist/nodes/ScraperNodeLinkedInPeopleSearch/ScraperNodeLinkedInPeopleSearch.node.js",
+      "dist/nodes/ScraperNodeInstagramReels/ScraperNodeInstagramReels.node.js",
+      "dist/nodes/ScraperNodeTikTokComments/ScraperNodeTikTokComments.node.js",
+      "dist/nodes/ScraperNodeYouTubeVideos/ScraperNodeYouTubeVideos.node.js",
+      "dist/nodes/ScraperNodeFacebookComments/ScraperNodeFacebookComments.node.js",
+      "dist/nodes/ScraperNodeFacebookPosts/ScraperNodeFacebookPosts.node.js",
+      "dist/nodes/ScraperNodeFacebookReels/ScraperNodeFacebookReels.node.js"
     ]
   },
   "scripts": {
