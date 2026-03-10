@@ -22,39 +22,39 @@ n8n-nodes-scrapernode
 
 Each scraper has its own dedicated node with tailored input fields and AI agent descriptions:
 
-| Node | Scraper | Input | Cost |
-| ---- | ------- | ----- | ---- |
-| **ScraperNode LinkedIn Profiles** | `linkedin-profiles` | Profile URLs | 5 cr |
-| **ScraperNode LinkedIn Companies** | `linkedin-companies` | Company URLs | 5 cr |
-| **ScraperNode LinkedIn Posts** | `linkedin-posts` | Profile/Company/Post URLs | 3 cr |
-| **ScraperNode LinkedIn Jobs** | `linkedin-jobs` | Job listing URLs | 1 cr |
-| **ScraperNode LinkedIn People Search** | `linkedin-people-search` | Search URLs | 1 cr |
-| **ScraperNode Instagram Profiles** | `instagram-profiles` | Profile URLs | 4 cr |
-| **ScraperNode Instagram Posts** | `instagram-posts` | Post URLs | 3 cr |
-| **ScraperNode Instagram Comments** | `instagram-comments` | Post URLs | 2 cr |
-| **ScraperNode Instagram Reels** | `instagram-reels` | Reel URLs | 1 cr |
-| **ScraperNode TikTok Profiles** | `tiktok-profiles` | Profile URLs | 4 cr |
-| **ScraperNode TikTok Videos** | `tiktok-posts` | Video URLs | 3 cr |
-| **ScraperNode TikTok Comments** | `tiktok-comments` | Video URLs | 1 cr |
-| **ScraperNode Twitter/X Profiles** | `twitter-profiles` | Profile URLs | 4 cr |
-| **ScraperNode Twitter/X Posts** | `twitter-posts` | Post URLs | 3 cr |
-| **ScraperNode YouTube Channels** | `youtube-channels` | Channel URLs | 4 cr |
-| **ScraperNode YouTube Comments** | `youtube-comments` | Video URLs | 2 cr |
-| **ScraperNode YouTube Videos** | `youtube-videos` | Video URLs | 1 cr |
-| **ScraperNode Facebook Profiles** | `facebook-profiles` | Profile URLs | 4 cr |
-| **ScraperNode Facebook Groups** | `facebook-groups` | Group URLs | 3 cr |
-| **ScraperNode Facebook Comments** | `facebook-comments` | Post URLs | 1 cr |
-| **ScraperNode Facebook Posts** | `facebook-posts` | Post URLs | 1 cr |
-| **ScraperNode Facebook Reels** | `facebook-reels` | Profile URLs | 1 cr |
-| **ScraperNode Indeed Jobs** | `indeed-jobs` | Job listing URLs | 5 cr |
-| **ScraperNode Indeed Companies** | `indeed-companies` | Company URLs | 5 cr |
-| **ScraperNode Glassdoor Companies** | `glassdoor-companies` | Company URLs | 5 cr |
-| **ScraperNode Glassdoor Reviews** | `glassdoor-reviews` | Review URLs | 5 cr |
-| **ScraperNode Glassdoor Jobs** | `glassdoor-jobs` | Job listing URLs | 5 cr |
-| **ScraperNode Yelp Businesses** | `yelp-businesses` | Business URLs | 5 cr |
-| **ScraperNode Yelp Reviews** | `yelp-reviews` | Review URLs | 5 cr |
-| **ScraperNode GitHub Repositories** | `github-repositories` | Repository URLs | 5 cr |
-| **ScraperNode Crunchbase Companies** | `crunchbase-companies` | Company URLs | 5 cr |
+| Node | Scraper | Input |
+| ---- | ------- | ----- |
+| **ScraperNode LinkedIn Profiles** | `linkedin-profiles` | Profile URLs |
+| **ScraperNode LinkedIn Companies** | `linkedin-companies` | Company URLs |
+| **ScraperNode LinkedIn Posts** | `linkedin-posts` | Profile/Company/Post URLs |
+| **ScraperNode LinkedIn Jobs** | `linkedin-jobs` | Job listing URLs |
+| **ScraperNode LinkedIn People Search** | `linkedin-people-search` | Search URLs |
+| **ScraperNode Instagram Profiles** | `instagram-profiles` | Profile URLs |
+| **ScraperNode Instagram Posts** | `instagram-posts` | Post URLs |
+| **ScraperNode Instagram Comments** | `instagram-comments` | Post URLs |
+| **ScraperNode Instagram Reels** | `instagram-reels` | Reel URLs |
+| **ScraperNode TikTok Profiles** | `tiktok-profiles` | Profile URLs |
+| **ScraperNode TikTok Videos** | `tiktok-posts` | Video URLs |
+| **ScraperNode TikTok Comments** | `tiktok-comments` | Video URLs |
+| **ScraperNode Twitter/X Profiles** | `twitter-profiles` | Profile URLs |
+| **ScraperNode Twitter/X Posts** | `twitter-posts` | Post URLs |
+| **ScraperNode YouTube Channels** | `youtube-channels` | Channel URLs |
+| **ScraperNode YouTube Comments** | `youtube-comments` | Video URLs |
+| **ScraperNode YouTube Videos** | `youtube-videos` | Video URLs |
+| **ScraperNode Facebook Profiles** | `facebook-profiles` | Profile URLs |
+| **ScraperNode Facebook Groups** | `facebook-groups` | Group URLs |
+| **ScraperNode Facebook Comments** | `facebook-comments` | Post URLs |
+| **ScraperNode Facebook Posts** | `facebook-posts` | Post URLs |
+| **ScraperNode Facebook Reels** | `facebook-reels` | Profile URLs |
+| **ScraperNode Indeed Jobs** | `indeed-jobs` | Job listing URLs |
+| **ScraperNode Indeed Companies** | `indeed-companies` | Company URLs |
+| **ScraperNode Glassdoor Companies** | `glassdoor-companies` | Company URLs |
+| **ScraperNode Glassdoor Reviews** | `glassdoor-reviews` | Review URLs |
+| **ScraperNode Glassdoor Jobs** | `glassdoor-jobs` | Job listing URLs |
+| **ScraperNode Yelp Businesses** | `yelp-businesses` | Business URLs |
+| **ScraperNode Yelp Reviews** | `yelp-reviews` | Review URLs |
+| **ScraperNode GitHub Repositories** | `github-repositories` | Repository URLs |
+| **ScraperNode Crunchbase Companies** | `crunchbase-companies` | Company URLs |
 
 Each scraper node supports three operations:
 
@@ -80,7 +80,7 @@ The **ScraperNode Jobs** node handles cross-cutting job management and credits:
 ## Features
 
 - **AI Agent compatible** — each scraper node has a focused `usableAsTool` description for accurate tool selection
-- **Per-platform icons** — color-coded icons make it easy to identify scrapers on the canvas
+- **Per-platform icons** — each scraper node has its own platform icon for easy identification on the canvas
 - **Return All toggle** — standard n8n pagination pattern for Get Results and List operations
 - **Exponential backoff** — automatic retry on transient 5xx, 429, and network errors during polling
 - **Data provenance** — every output item includes `pairedItem` for n8n's data tracking
