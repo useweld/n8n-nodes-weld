@@ -19,7 +19,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
+      - run: pnpm lint:n8n
       - run: pnpm build
       - run: pnpm test
-      - name: n8n community package scan
-        run: NODE_PATH=./node_modules npx @n8n/scan-community-package n8n-nodes-scrapernode
+      - name: n8n community package scan (local)
+        run: pnpm lint:n8n-scan
