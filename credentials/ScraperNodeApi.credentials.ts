@@ -9,6 +9,10 @@ export class ScraperNodeApi implements ICredentialType {
 	name = "scraperNodeApi";
 	displayName = "ScraperNode API";
 	documentationUrl = "https://scrapernode.com/docs/api";
+	icon = {
+		light: "file:scrapernode.svg",
+		dark: "file:scrapernode.dark.svg",
+	} as const;
 
 	properties: INodeProperties[] = [
 		{

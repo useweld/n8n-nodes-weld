@@ -88,7 +88,7 @@
     "dev:n8n:down": "docker compose -f docker-compose.dev.yml down",
     "dev:n8n:reset": "docker compose -f docker-compose.dev.yml down -v",
     "lint": "tsc --noEmit",
-    "lint:n8n": "eslint --config eslint.n8n.config.mjs nodes/ credentials/",
+    "lint:n8n": "npx @n8n/node-cli lint",
     "lint:n8n-scan": "eslint --config eslint.n8n-scan.config.mjs --max-warnings 0 'dist/**/*.js'",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -98,7 +98,9 @@
     "n8n-workflow": "*"
   },
   "devDependencies": {
+    "@eslint/js": "~9.29.0",
     "@n8n/eslint-plugin-community-nodes": "^0.9.0",
+    "@n8n/node-cli": "^0.23.0",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.0",
@@ -107,7 +109,7 @@
     "@types/node": "^20",
     "@typescript-eslint/parser": "^8.54.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "eslint": "~9.17.0",
+    "eslint": "~9.29.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.6",
     "n8n-workflow": "^1.0.0",
     "semantic-release": "^25.0.3",

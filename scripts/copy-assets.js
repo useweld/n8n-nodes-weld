@@ -17,3 +17,4 @@ function copyAssets(srcDir, destDir) {
 }
 
 copyAssets("nodes", "dist/nodes");
+copyAssets("credentials", "dist/credentials");
