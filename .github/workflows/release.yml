@@ -35,6 +35,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # npm auth handled via OIDC trusted publishing (no NPM_TOKEN needed)
         run: pnpm exec semantic-release
-      - name: Publish alias packages
-        if: steps.release.outcome == 'success'
-        run: node scripts/publish-aliases.js
