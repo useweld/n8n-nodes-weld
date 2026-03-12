@@ -22,6 +22,7 @@
     "data-extraction",
     "scrapernode"
   ],
+  "packageManager": "pnpm@10.28.2",
   "license": "MIT",
   "repository": {
     "type": "git",
