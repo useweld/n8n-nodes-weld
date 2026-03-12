@@ -5,7 +5,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from "n8n-workflow";
-import { NodeOperationError } from "n8n-workflow";
+import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
 import { BASE_URL, httpWithRetry } from "../shared/api";
 
 export class ScraperNodeJobs implements INodeType {
@@ -22,8 +22,8 @@ export class ScraperNodeJobs implements INodeType {
 		description:
 			"Manage ScraperNode scrape jobs and credits — list, cancel, check status, and view balance",
 		defaults: { name: "ScraperNode Jobs" },
-		inputs: ["main"],
-		outputs: ["main"],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		credentials: [{ name: "scraperNodeApi", required: true }],
 		properties: [

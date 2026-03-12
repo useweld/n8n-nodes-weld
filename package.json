@@ -22,9 +22,7 @@
     "data-extraction",
     "scrapernode"
   ],
-  "packageManager": "pnpm@10.28.2",
   "license": "MIT",
-  "main": "dist/nodes/ScraperNodeJobs/ScraperNodeJobs.node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ScraperNode/n8n-nodes-scrapernode.git"
@@ -38,8 +36,7 @@
     "provenance": true
   },
   "files": [
-    "dist",
-    "package.json"
+    "dist"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -82,8 +79,8 @@
     ]
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && node scripts/copy-assets.js",
-    "dev": "tsc -p tsconfig.build.json --watch",
+    "build": "n8n-node build",
+    "dev": "tsc --watch",
     "dev:n8n": "docker compose -f docker-compose.dev.yml up",
     "dev:n8n:down": "docker compose -f docker-compose.dev.yml down",
     "dev:n8n:reset": "docker compose -f docker-compose.dev.yml down -v",
@@ -92,7 +89,7 @@
     "lint:n8n-scan": "eslint --config eslint.n8n-scan.config.mjs --max-warnings 0 'dist/**/*.js'",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepublishOnly": "pnpm build && pnpm lint:n8n-scan"
+    "prepublishOnly": "pnpm build && pnpm lint:n8n"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
