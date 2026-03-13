@@ -1,8 +1,11 @@
 name: Regenerate Icons
 
 on:
-  schedule:
-    - cron: "0 6 * * 1" # weekly, Monday 6am UTC
+  push:
+    branches: [main]
+    paths:
+      - "pnpm-lock.yaml"
+      - "scripts/generate-icons.ts"
   workflow_dispatch: # allow manual trigger
 
 jobs:
