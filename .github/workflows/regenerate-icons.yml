@@ -1,0 +1,35 @@
+name: Regenerate Icons
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # weekly, Monday 6am UTC
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm generate:icons
+
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: regenerate platform icons from Simple Icons"
+          title: "chore: regenerate platform icons"
+          body: |
+            Auto-regenerated platform SVG icons from the latest `simple-icons` package.
+
+            - Picks up any updated brand colors or path changes
+            - Ensures all node directories stay in sync
+          branch: chore/regenerate-icons
+          delete-branch: true
