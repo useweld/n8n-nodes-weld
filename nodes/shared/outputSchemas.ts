@@ -1,4 +1,3 @@
-/* eslint-disable n8n-nodes-base/node-param-type-options-password-missing */
 /**
  * AUTO-GENERATED output field metadata for n8n NodeHint display
  *
@@ -808,7 +807,7 @@ export const outputSchemas: Record<string, OutputField[]> = {
 		{ name: "carousel_images", type: "array", required: false, description: "List of images for carousel-type posts (0.00% fill rate)" },
 		{ name: "tagged_user", type: "array", required: false, description: "Users tagged in the post (20.00% fill rate)" },
 		{ name: "profile_followers", type: "number", required: true, description: "Number of followers of the post author (100.00% fill rate)" },
-		{ name: "tt_chain_token", type: "string", required: true, description: "TikTok chain token (100.00% fill rate)" },
+		{ name: "tt_chain_key", type: "string", required: true, description: "TikTok chain identifier (100.00% fill rate)" },
 	],
 	"tiktok-posts-by-profile": [
 		{ name: "url", type: "string", required: true, description: "Post URL (100.00% fill rate)" },
@@ -844,7 +843,7 @@ export const outputSchemas: Record<string, OutputField[]> = {
 		{ name: "carousel_images", type: "array", required: false, description: "List of images for carousel-type posts (27.00% fill rate)" },
 		{ name: "tagged_user", type: "array", required: false, description: "Users tagged in the post (7.00% fill rate)" },
 		{ name: "profile_followers", type: "number", required: true, description: "Number of followers of the post author (100.00% fill rate)" },
-		{ name: "tt_chain_token", type: "string", required: true, description: "TikTok chain token (100.00% fill rate)" },
+		{ name: "tt_chain_key", type: "string", required: true, description: "TikTok chain identifier (100.00% fill rate)" },
 		{ name: "region", type: "string", required: false, description: "Region/country of the post (0.00% fill rate)" },
 	],
 	"tiktok-posts-by-search": [
