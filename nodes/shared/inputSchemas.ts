@@ -114,4 +114,85 @@ export const inputSchemas: Record<string, InputFieldDef[]> = {
 	"crunchbase-companies": [
 		{ name: "url", type: "string", required: true, description: "Crunchbase company profile URL", placeholder: "https://www.crunchbase.com/organization/..." },
 	],
+	"tiktok-posts-by-url": [
+		{ name: "url", type: "string", required: true, description: "Video URL", placeholder: "https://tiktok.com/@user/video/123" },
+	],
+	"tiktok-posts-by-profile": [
+		{ name: "url", type: "string", required: true, description: "Profile URL", placeholder: "https://tiktok.com/@username" },
+	],
+	"tiktok-posts-by-search": [
+		{ name: "url", type: "string", required: true, description: "Search URL", placeholder: "https://tiktok.com/search?q=keyword" },
+	],
+	"tiktok-shop": [
+		{ name: "url", type: "string", required: true, description: "Shop Product URL", placeholder: "https://tiktok.com/shop/..." },
+	],
+	"tiktok-shop-categories": [
+		{ name: "url", type: "string", required: true, description: "Shop Category URL", placeholder: "https://tiktok.com/shop/..." },
+	],
+	"facebook-pages-and-profiles": [
+		{ name: "url", type: "string", required: true, description: "Page or Profile URL", placeholder: "https://facebook.com/pagename" },
+	],
+	"facebook-personal-profiles": [
+		{ name: "url", type: "string", required: true, description: "Profile URL", placeholder: "https://facebook.com/username" },
+	],
+	"facebook-marketplace": [
+		{ name: "url", type: "string", required: true, description: "Marketplace Listing URL", placeholder: "https://facebook.com/marketplace/item/123456" },
+	],
+	"facebook-events": [
+		{ name: "url", type: "string", required: true, description: "Event URL", placeholder: "https://facebook.com/events/123456789" },
+	],
+	"facebook-company-reviews": [
+		{ name: "url", type: "string", required: true, description: "Company Page URL", placeholder: "https://facebook.com/company-page" },
+	],
+	"google-maps-listings": [
+		{ name: "url", type: "string", required: true, description: "Google Maps URL", placeholder: "https://google.com/maps/place/business-name" },
+	],
+	"google-maps-reviews": [
+		{ name: "url", type: "string", required: true, description: "Google Maps URL", placeholder: "https://google.com/maps/place/business-name" },
+	],
+	"google-search-results": [
+		{ name: "keyword", type: "string", required: true, description: "Search Query", placeholder: "best CRM software for startups" },
+	],
+	"google-search-ai": [
+		{ name: "keyword", type: "string", required: true, description: "Search Query", placeholder: "what is the best project management tool" },
+	],
+	"google-shopping-products": [
+		{ name: "url", type: "string", required: true, description: "Google Shopping Product URL", placeholder: "https://google.com/shopping/product/123" },
+	],
+	"google-shopping-search": [
+		{ name: "keyword", type: "string", required: true, description: "Product Search Query", placeholder: "standing desk adjustable" },
+	],
+	"google-flights-search": [
+		{ name: "url", type: "string", required: true, description: "Google Flights Search URL", placeholder: "https://google.com/travel/flights/search?tfs=..." },
+	],
+	"google-hotels-search": [
+		{ name: "url", type: "string", required: true, description: "Google Hotels URL", placeholder: "https://google.com/travel/hotels/..." },
+	],
+	"zoominfo-companies": [
+		{ name: "url", type: "string", required: true, description: "Company URL", placeholder: "https://zoominfo.com/c/company-name/123456" },
+	],
+	"trustpilot-reviews": [
+		{ name: "url", type: "string", required: true, description: "Business Reviews URL", placeholder: "https://trustpilot.com/review/domain.com" },
+	],
+	"g2-reviews": [
+		{ name: "url", type: "string", required: true, description: "Product Reviews URL", placeholder: "https://g2.com/products/product-name/reviews" },
+	],
+	"pitchbook-companies": [
+		{ name: "url", type: "string", required: true, description: "Company URL", placeholder: "https://pitchbook.com/profiles/company/12345-67" },
+	],
+	"xing-profiles": [
+		{ name: "url", type: "string", required: true, description: "Profile URL", placeholder: "https://xing.com/profile/firstname_lastname" },
+	],
+	"owler-companies": [
+		{ name: "url", type: "string", required: true, description: "Company URL", placeholder: "https://owler.com/company/company-name" },
+	],
+	"martindale-lawyers": [
+		{ name: "url", type: "string", required: true, description: "Attorney or Law Firm URL", placeholder: "https://martindale.com/attorney/firstname-lastname-12345" },
+	],
+	"ventureradar-companies": [
+		{ name: "url", type: "string", required: true, description: "Company URL", placeholder: "https://ventureradar.com/company/company-name/123" },
+	],
+	"trustradius-reviews": [
+		{ name: "url", type: "string", required: true, description: "Product Reviews URL", placeholder: "https://trustradius.com/products/product-name/reviews" },
+	],
 };

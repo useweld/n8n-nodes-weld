@@ -1,0 +1,21 @@
+{
+  "node": "n8n-nodes-scrapernode.scraperNodeGoogleFlightsSearch",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Data & Storage"],
+  "subcategories": {
+    "Data & Storage": ["Data Transformation"]
+  },
+  "resources": {
+    "primaryDocumentation": [{ "url": "https://scrapernode.com/docs/api" }]
+  },
+  "alias": [
+    "scrapernode",
+    "scrape",
+    "data extraction",
+    "google flights",
+    "flights",
+    "travel",
+    "prices"
+  ]
+}
